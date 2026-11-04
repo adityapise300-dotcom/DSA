@@ -95,3 +95,20 @@ void SingleLinkedList::insertByPos(){
     temp->next = temp1->next;
     temp1->next = temp;
 }
+
+void SingleLinkedList::insertByVal(){
+    int d,val;
+    cout << "Enter the data for the new node : ";
+    cin >> d;
+    cout << "Enter the value of the node after which you want to inseert the new one : ";
+    cin >> val;
+    node*temp = new node;
+    temp->data = d;
+    node*temp1 = head;
+    while(temp1->data != val){
+        temp1 = temp1->next;
+    }
+    temp->next = temp1->next;
+    temp1->next = temp;
+}
+
