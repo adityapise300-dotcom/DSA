@@ -110,3 +110,13 @@ void Binary::twos(){
         }
     cout<<endl;
 }
+
+int main(){
+    Binary B;
+    B.create();
+    B.display();
+    B.ones();
+    B.twos();
+
+    return 0;
+}
