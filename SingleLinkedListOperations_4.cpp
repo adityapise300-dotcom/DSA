@@ -220,3 +220,99 @@ void SingleLinkedList :: findMiddle(){
     }
     cout<<"Value of middle node is: "<<temp->data<<endl;
 }
+
+int main(){
+    int n, choice, subchoice, temp;
+    SingleLinkedList L;
+    char cont;
+
+    cout<<"How many elements do you want in the list ? : "; 
+    cin>>n;
+    
+    for(int i=0; i<n; i++){
+        cin>>temp;
+        L.createList(temp);
+    }
+
+    cout<<"Current Linked List: ";
+    L.displayList();
+
+   do{  
+        cout<<"1. Insertion\n2. Deletion\n3. Search\n4. Reverse\n5. Display "<<endl; 
+        cout<<"Which opertion do you want to perform : "; 
+        cin>>choice; 
+
+        switch(choice){ 
+        case 1: 
+        cout<<"1 Insert at first position\n2 Insert at last position\n3 Insert at any position\n4 Insert after any value"<<endl; 
+        cout<<"Choose the operation : "; 
+        cin>>subchoice; 
+        switch(subchoice){ 
+            case 1: 
+            L.insertFirst(); 
+            L.displayList(); 
+            break; 
+            case 2: 
+            L.insertLast(); 
+            L.displayList(); 
+            break; 
+            case 3: 
+            L.insertByPos(); 
+            L.displayList(); 
+            break; 
+            case 4: 
+            L.insertByVal(); 
+            L.displayList(); 
+            break; 
+            default: 
+            cout<<"Invalid Choice!"<<endl; 
+            break; 
+        } 
+        break; 
+        case 2: 
+        cout<<"1 Delete the head\n2 Delete the tail\n3 Delete by position\n4 Delete by value"<<endl; 
+        cout<<"Choose the operation : "; 
+        cin>>subchoice; 
+        switch(subchoice){ 
+            case 1: 
+            L.deleteFirst(); 
+            L.displayList(); 
+            break; 
+            case 2: 
+            L.deleteLast(); 
+            L.displayList(); 
+            break; 
+            case 3: 
+            L.deleteByPos(); 
+            L.displayList(); 
+            break; 
+            case 4: 
+            L.deleteByVal(); 
+            L.displayList(); 
+            break; 
+            default: 
+            cout<<"Invalid Choice!"<<endl; 
+            break; 
+        } 
+        break; 
+        case 3: 
+        L.search(); 
+        break; 
+        case 4: 
+        L.reverseList(); 
+        L.displayList(); 
+        break; 
+        case 5: 
+        L.displayList(); 
+        break; 
+        default: 
+        cout<<"Invalid Choice!"; 
+        break; 
+       }
+
+      cout<<"Do you want to continue>(y/n): ";
+      cin>>cont;
+    }while(cont=='Y'||cont=='y');
+
+    return 0;
+}
