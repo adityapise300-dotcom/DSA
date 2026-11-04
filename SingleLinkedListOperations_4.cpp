@@ -112,3 +112,23 @@ void SingleLinkedList::insertByVal(){
     temp1->next = temp;
 }
 
+void SingleLinkedList::deleteFirst(){
+    node*temp = head;
+    node*temp1 = temp;
+    temp = temp->next;
+    head = temp;
+    temp1->next = NULL;
+    delete temp1;
+}
+
+void SingleLinkedList::deleteLast(){
+    node*temp = head;
+    node*temp1;
+    while(temp->next != NULL){
+        temp1 = temp;
+        temp = temp->next;
+    }
+    temp1->next = NULL;
+    temp->next = NULL;
+    delete temp;
+}
