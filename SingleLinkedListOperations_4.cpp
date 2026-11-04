@@ -185,3 +185,17 @@ void SingleLinkedList:: search(){
     }
     cout<<"This node was found at position:"<<count<<endl;
 }
+
+void SingleLinkedList :: reverseList(){
+    node *prev, *curr, *nxt;
+    prev = NULL;
+    curr = head;
+    while(curr!=NULL){
+        nxt = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = nxt;
+    }
+
+    head = prev;
+}
