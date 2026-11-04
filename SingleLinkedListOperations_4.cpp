@@ -199,3 +199,24 @@ void SingleLinkedList :: reverseList(){
 
     head = prev;
 }
+
+void SingleLinkedList :: findMiddle(){
+    if(head == NULL) {
+        cout << "List is empty";
+        return;
+    }
+    node*temp1 = head;
+    node*temp = head;
+    int count = 0;
+
+    while(temp1!=NULL){
+        temp1=temp1->next;
+        count++;
+    }
+    int search = 1;
+    while(search!=count/2){
+        temp=temp->next;
+        search++;
+    }
+    cout<<"Value of middle node is: "<<temp->data<<endl;
+}
