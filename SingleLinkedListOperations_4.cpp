@@ -25,7 +25,6 @@ class SingleLinkedList{
         void search();
         void reverseList();
         void findMiddle();
-        ~SingleLinkedList();
 };
 
 void SingleLinkedList::createList(int d){
@@ -47,7 +46,7 @@ void SingleLinkedList::displayList(){
         return;
     }
     node* temp1 = head;
-    while(temp1==NULL){
+    while(temp1!=NULL){
         cout<<temp1->data<<" ";
         temp1 = temp1->next;
     }
