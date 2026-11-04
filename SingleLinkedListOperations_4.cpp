@@ -172,3 +172,16 @@ void SingleLinkedList::deleteByVal(){
         }
     }
 }
+
+void SingleLinkedList:: search(){
+    node*temp1 = head;
+    int val;
+    cout<<"Enter the value you want to search: ";
+    cin>>val;
+    int count = 1;
+    while(temp1->data != val){
+        temp1 = temp1->next;
+        count++;
+    }
+    cout<<"This node was found at position:"<<count<<endl;
+}
