@@ -132,3 +132,43 @@ void SingleLinkedList::deleteLast(){
     temp->next = NULL;
     delete temp;
 }
+
+void SingleLinkedList::deleteByPos(){
+    node*temp = head;
+    node*temp1 = head;
+    int count = 1;
+    int pos;
+    cout<<"Node at what position do you want to delete : "; 
+    cin>>pos;
+    while(temp->next != NULL){
+        if(count == pos){
+            temp1->next = temp->next;
+            temp->next = NULL;
+            delete temp;
+            return;
+        }else{
+            temp1=temp;
+            temp = temp->next;
+            count++;
+        }
+    }
+}
+
+void SingleLinkedList::deleteByVal(){
+    node*temp = head;
+    node*temp1 = head;
+    int val;
+    cout<<"Enter the value you want to delete: ";
+    cin>>val;
+    while(temp->next != NULL){
+        if(temp->data == val){
+            temp1->next = temp->next;
+            temp->next = NULL;
+            delete temp;
+            return;
+        }else{
+            temp1 = temp;
+            temp = temp->next;
+        }
+    }
+}
