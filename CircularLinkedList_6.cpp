@@ -126,3 +126,39 @@ void CircularLinkedList::insertByValue(){
     }
 }
 
+void CircularLinkedList::insertByPosition(){
+    if(head==NULL){
+        cout<<"List is empty";
+        return;
+    }
+    int x,pos;
+    cout<<"Enter the Position at which you want to insert: ";
+    cin>>pos;
+    cout<<"Enter the value of new node: ";
+    cin>>x;
+    Node*newNode = new Node;
+    newNode->data = x;
+    int count = 1;
+    Node*temp = head;
+    if(pos==1){
+        Node*temp1 = head;
+        temp1 = temp1->next;
+        while(temp1->next !=head){
+            temp1 = temp1->next;
+        }
+        newNode->next = head;
+        temp1->next = newNode;
+        head = newNode;
+        return;
+    }
+    while(count<=pos-1){
+        if(count == pos-1){
+            newNode->next = temp->next;
+            temp->next = newNode;
+            return;
+        }else{
+            temp = temp->next;
+            count++;
+        }
+    }
+}
