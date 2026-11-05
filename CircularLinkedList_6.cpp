@@ -199,4 +199,26 @@ void CircularLinkedList::deleteLast(){
     delete temp;
 }
 
+void CircularLinkedList::deleteByValue(){
+    if(head==NULL){
+        cout<<"List is empty";
+        return;
+    }
+    int val;
+    cout<<"enter the value of node after which you want you delete the node: ";
+    cin>>val;
+    Node*temp = head;
+    Node*temp1 = head;
+    temp1 = temp1->next;
+    temp = temp->next;
+    while(temp->data != val){
+        temp = temp->next;
+    }
+    while(temp1->next->data != val){
+        temp1 = temp1->next;
+    }
+    temp1->next = temp->next;
+    delete temp;
+}
+
 
