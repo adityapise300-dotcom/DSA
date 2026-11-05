@@ -162,3 +162,41 @@ void CircularLinkedList::insertByPosition(){
         }
     }
 }
+
+void CircularLinkedList::deleteFirst(){
+    if(head==NULL){
+        cout<<"List is empty";
+        return;
+    }
+    Node*temp = head;
+    Node*temp1 = head;
+    temp1 = temp1->next;
+    while(temp1->next !=head){
+        temp1 = temp1->next;
+    }
+    temp1->next = temp->next;
+    head = temp->next;
+    delete temp;
+}
+
+void CircularLinkedList::deleteLast(){
+    if(head==NULL){
+        cout<<"List is empty";
+        return;
+    }
+    Node*temp = head;
+    Node*temp1 = head;
+    temp1 = temp1->next;
+    temp = temp->next;
+    while(temp->next!=head){
+        temp = temp->next;
+    }
+    while(temp1->next->next!=head){
+        temp1 = temp1->next;
+    }
+
+    temp1->next = head;
+    delete temp;
+}
+
+
