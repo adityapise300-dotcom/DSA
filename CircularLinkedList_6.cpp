@@ -221,4 +221,22 @@ void CircularLinkedList::deleteByValue(){
     delete temp;
 }
 
+void CircularLinkedList::reverse(){
+    if(head==NULL){
+        cout<<"List is empty";
+        return;
+    }
+    Node *curr, *prev, *nxt;
+    curr = head;
+    prev = NULL;
+    nxt = NULL;
+    do{
+        nxt = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = nxt;
+    }while(curr != head);
 
+    head->next = prev;
+    head = prev;
+}
