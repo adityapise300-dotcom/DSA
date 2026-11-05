@@ -65,3 +65,30 @@ void Stack::display(){
     }
 }
 
+int main(){
+    int choice;
+    char cont;
+    Stack S;
+    S.create();
+    S.display();
+    do{
+        cout<<endl<<"Menu: \n1. push \n2. pop"<<endl;
+        cout<<"Enter your choice: ";
+        cin>>choice;
+        switch(choice){
+            case 1:
+                S.push();
+                S.display();
+                break;
+            
+            case 2:
+                S.pop();
+                S.display();
+                break;
+        }
+
+        cout<<endl<<"Do you want to redo any operation?(Y/N): ";
+        cin>>cont;
+    }while(cont=='Y'||cont=='y');
+    return 0;
+}
