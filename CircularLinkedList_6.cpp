@@ -64,3 +64,44 @@ void CircularLinkedList::display(){
     cout<<endl;
 }
 
+void CircularLinkedList::insertFirst(){
+    int x;
+    cout<<"Enter the value of new node: ";
+    cin>>x;
+    Node*newNode = new Node;
+    newNode->data = x;
+    if(head == NULL){
+        head = newNode;
+        newNode->next = head;
+    }else{
+        Node*temp = head;
+        temp = temp->next;
+        while(temp->next !=head){
+            temp = temp->next;
+        }
+        newNode->next = head;
+        temp->next = newNode;
+        head = newNode;
+    }
+}
+
+void CircularLinkedList::insertLast(){
+    int x;
+    cout<<"Enter the value of new node: ";
+    cin>>x;
+    Node*newNode = new Node;
+    newNode->data = x;
+    if(head == NULL){
+        head = newNode;
+        newNode->next = head;
+    }else{
+        Node*temp = head;
+        temp = temp->next;
+        while(temp->next !=head){
+            temp = temp->next;
+        }
+        newNode->next = head;
+        temp->next = newNode;
+    }
+}
+
