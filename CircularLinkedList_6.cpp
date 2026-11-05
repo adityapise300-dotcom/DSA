@@ -105,3 +105,24 @@ void CircularLinkedList::insertLast(){
     }
 }
 
+void CircularLinkedList::insertByValue(){
+    int x,val;
+    cout<<"Enter the value after which you want to insert: ";
+    cin>>val;
+    cout<<"Enter the value of new node: ";
+    cin>>x;
+    Node*newNode = new Node;
+    newNode->data = x;
+    if(head == NULL){
+        cout<<"The list is empty."<<endl;
+        return;
+    }else{
+        Node*temp = head;
+        while(temp->data != val){
+            temp = temp->next;
+        }
+        newNode->next = temp->next;
+        temp->next = newNode;
+    }
+}
+
