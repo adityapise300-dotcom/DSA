@@ -73,3 +73,56 @@ string InfToPost::conversion(string infix){
     return postfix;
     
 };
+
+string InfToPost::conversion(string infix){
+    string postfix = "";
+    stack<char> s;
+
+    for(int i=0; i<infix.length(); i++){
+
+        char ch = infix[i];
+
+        if(isoperand(ch)){
+            postfix += ch;
+        }else if(ch == '('){
+            s.push(ch);
+        }else if(ch == ')'){
+            while(!s.empty() && s.top()!='('){
+                postfix += s.top();
+                s.pop();
+            }
+
+            if(!s.empty()){
+                s.pop();
+            }
+        }else{
+            while(!s.empty() && s.top()!='(' && precedence(s.top()) >= precedence(ch) ){
+                postfix+=s.top();
+                s.pop();
+            }
+
+            s.push(ch);
+        }
+    }
+
+    while(!s.empty()){
+            postfix += s.top();
+            s.pop();
+        }
+
+    return postfix;
+    
+};
+
+int main(){
+    InfToPost I;
+
+    string infix;
+
+    cout<<"Enter the infix expression: ";
+    cin>>infix;
+
+    cout<<"The Resulting Postfix expression: "<<I.conversion(infix)<<endl;
+
+    return 0;
+}
