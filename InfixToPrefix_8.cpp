@@ -22,3 +22,15 @@ int InfToPost::precedence(char op){
     }
 }
 
+bool InfToPost::isoperand(char ch){
+    if(ch>='A' && ch<='Z'){
+        return true;
+    }
+
+    if(ch>='a' && ch<='z'){
+        return true;
+    }
+
+    return false;
+}
+
