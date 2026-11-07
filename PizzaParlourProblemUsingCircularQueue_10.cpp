@@ -60,3 +60,27 @@ void Parlour::serveorder(){
         front = (front+1)%M;
     }
 }
+
+void Parlour::displayorder(){
+    if(front==-1){
+        cout<<"No orders remaining"<<endl;
+        return;
+    }
+
+    cout << "Pending Orders"<<endl;
+
+    int i = front;
+
+    while(true){
+        cout<<queue[i]<<" ";
+
+        if(i==rear){
+            break;
+        }
+
+        i=(i+1)%M;
+    }
+
+    cout<<endl;
+}
+
