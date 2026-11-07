@@ -39,5 +39,16 @@ void Queue::create(){
     }
 }
 
-
+void Queue::display(){
+    if(head==NULL){
+        cout<<"List is empty.";
+    }
+    Node*temp = head;
+    cout<<"Your current List of Queue is: ";
+   while(temp!=NULL){
+        cout<<temp->data<<" ";
+        temp = temp->next;
+   }
+   cout<<endl;
+}
 
