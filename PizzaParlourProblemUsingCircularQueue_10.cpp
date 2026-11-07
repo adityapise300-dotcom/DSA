@@ -44,3 +44,19 @@ void Parlour::placeorder(){
 
     cout<<"Order "<<order<<" was placed Successfully"<<endl; 
 }
+
+void Parlour::serveorder(){
+    if(front==-1){
+        cout<<"No orders to serve"<<endl;
+        return;
+    }
+
+    cout<<"Order "<<queue[front]<<" was served!"<<endl;
+
+    if(front==rear){
+        front=-1;
+        rear=-1;
+    }else{
+        front = (front+1)%M;
+    }
+}
