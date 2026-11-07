@@ -21,3 +21,26 @@ Parlour::Parlour(int size){
     rear = -1;
 }
 
+void Parlour::placeorder(){
+    
+    int order;
+
+    if((rear+1)%M == front){
+        cout<<"Queue is full !!";
+        return;
+    }
+
+    cout<<"Enter the order: ";
+    cin>>order;
+
+    if(front==-1){
+        rear = 0;
+        front = 0;
+    }else{
+        rear = (rear+1)%M;
+    }
+
+    queue[rear] = order;
+
+    cout<<"Order "<<order<<" was placed Successfully"<<endl; 
+}
