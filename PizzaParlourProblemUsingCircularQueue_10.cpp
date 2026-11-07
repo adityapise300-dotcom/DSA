@@ -84,3 +84,50 @@ void Parlour::displayorder(){
     cout<<endl;
 }
 
+int main(){
+    int size, choice;
+
+    cout<<"Enter the size of queue: ";
+    cin>>size;
+
+    if(size<=0 || size>100){
+        cout<<"Invalid queue size!"<<endl;
+        return 0;
+    }
+
+    Parlour p(size);
+
+    do{
+        cout<<"\n\n1. Place Order";
+        cout<<"\n2. Serve Order";
+        cout<<"\n3. Display Orders";
+        cout<<"\n4. Exit";
+
+        cout<<"\nEnter your choice: ";
+        cin>>choice;
+
+        switch(choice){
+            case 1:
+                p.placeorder();
+                break;
+
+            case 2:
+                p.serveorder();
+                break;
+
+            case 3:
+                p.displayorder();
+                break;
+
+            case 4:
+                cout<<"Exiting..."<<endl;
+                break;
+
+            default:
+                cout<<"Invalid choice!"<<endl;
+        }
+
+    }while(choice!=4);
+
+    return 0;
+}
