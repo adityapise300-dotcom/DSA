@@ -12,6 +12,10 @@ class Queue{
     int n;
 
     public:
+        Queue(){
+            head = NULL;
+            n = 0;
+        }
         void create();
         void display();
         void enqueue();
@@ -21,6 +25,7 @@ class Queue{
 void Queue::create(){
     int x;
     Node*temp = NULL;
+    head = NULL;
     cout<<"Enter the capacity of queue: ";
     cin>>n;
     cout<<"Enter the value of nodes in the queue: ";
@@ -42,6 +47,7 @@ void Queue::create(){
 void Queue::display(){
     if(head==NULL){
         cout<<"List is empty.";
+        return;
     }
     Node*temp = head;
     cout<<"Your current List of Queue is: ";
@@ -58,6 +64,7 @@ void Queue::enqueue(){
     cin>>val;
     Node*newNode = new Node;
     newNode->data = val;
+    newNode->next = NULL;
     if(head==NULL){
         head = newNode;
         return;
@@ -67,4 +74,44 @@ void Queue::enqueue(){
         temp = temp->next;
     }
     temp->next = newNode;
+}
+
+void Queue::dequeue(){
+    if(head==NULL){
+        cout<<"List is empty, can't pop";
+        return;
+    }
+
+    Node*temp = head;
+    head = temp->next;
+    delete temp;
+}
+
+int main(){
+    int choice;
+    char cont;
+    Queue Q;
+    Q.create();
+    Q.display();
+    cout<<endl<<"menu: "<<"\n1. enqueue(push) \n2. dequeue(pop)"<<endl;
+    cout<<"Enter the Operation you want to perform (1/2): ";
+    cin>>choice;
+    do{
+        switch(choice){
+            case 1:
+                Q.enqueue();
+                Q.display();
+                break;
+
+            case 2:
+                Q.dequeue();
+                Q.display();
+                break;
+        }
+
+        cout<<"do you want to redo the operation?(Y/N): ";
+        cin>>cont;
+    }while(cont=='Y'||cont=='y');
+
+    return 0;
 }
