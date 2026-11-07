@@ -52,3 +52,19 @@ void Queue::display(){
    cout<<endl;
 }
 
+void Queue::enqueue(){
+    int val;
+    cout<<"Enter the value of the new node: ";
+    cin>>val;
+    Node*newNode = new Node;
+    newNode->data = val;
+    if(head==NULL){
+        head = newNode;
+        return;
+    }
+    Node*temp = head;
+    while(temp->next != NULL){
+        temp = temp->next;
+    }
+    temp->next = newNode;
+}
