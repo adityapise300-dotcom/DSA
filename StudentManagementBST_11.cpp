@@ -172,3 +172,83 @@ void StudentBST::deleteStudent()
     }
 }
 
+// Find minimum node in a subtree
+Node* StudentBST::findMin(Node *root)
+{
+    while (root != NULL && root->left != NULL)
+        root = root->left;
+    return root;
+}
+
+// Delete student record
+Node* StudentBST::deleteNode(Node *root, int r)
+{
+    if (root == NULL)
+        return root;
+    if (r < root->rollNo)
+        root->left = deleteNode(root->left, r);
+    else if (r > root->rollNo)
+        root->right = deleteNode(root->right, r);
+    else
+    {
+        if (root->left == NULL)
+        {
+            Node *temp = root->right;
+            delete root;
+            return temp;
+        }
+        else if (root->right == NULL)
+        {
+            Node *temp = root->left;
+            delete root;
+            return temp;
+        }
+        Node *temp = findMin(root->right);
+        root->rollNo = temp->rollNo;
+        root->name = temp->name;
+        root->marks = temp->marks;
+        root->right = deleteNode(root->right, temp->rollNo);
+    }
+    return root;
+}
+
+void StudentBST::deleteStudent()
+{
+    int r;
+    cout << "Enter Roll Number to delete: ";
+    cin >> r;
+    if (search(root, r) == NULL)
+        cout << "Student record not found.\n";
+    else
+    {
+        root = deleteNode(root, r);
+        cout << "Student record deleted successfully.\n";
+    }
+}
+
+int main()
+{
+    StudentBST bst;
+    int choice;
+    do
+    {
+        cout << "\n--- Student Record Management System ---\n";
+        cout << "1. Add Student\n";
+        cout << "2. Display All Students\n";
+        cout << "3. Search Student\n";
+        cout << "4. Delete Student\n";
+        cout << "5. Exit\n";
+        cout << "Enter your choice: ";
+        cin >> choice;
+        switch (choice)
+        {
+            case 1: bst.addStudent(); break;
+            case 2: bst.displayStudents(); break;
+            case 3: bst.searchStudent(); break;
+            case 4: bst.deleteStudent(); break;
+            case 5: cout << "Exiting program.\n"; break;
+            default: cout << "Invalid choice!\n";
+        }
+    } while (choice != 5);
+    return 0;
+}
