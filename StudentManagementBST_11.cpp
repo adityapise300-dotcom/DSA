@@ -70,3 +70,24 @@ void StudentBST::addStudent()
     root = insert(root, r, n, m);
 }
 
+// Display records in ascending order of roll number
+void StudentBST::displayInorder(Node *root)
+{
+    if (root != NULL)
+    {
+        displayInorder(root->left);
+        cout << "Roll No: " << root->rollNo
+             << ", Name: " << root->name
+             << ", Marks: " << root->marks << endl;
+        displayInorder(root->right);
+    }
+}
+
+void StudentBST::displayStudents()
+{
+    if (root == NULL)
+        cout << "No student records found.\n";
+    else
+        displayInorder(root);
+}
+
