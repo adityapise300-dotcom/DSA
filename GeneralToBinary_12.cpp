@@ -24,7 +24,6 @@ class Tree{
      void MakeTree();
      void conversion(Node*node);
      void show();
-     void distroy(Node*node);
 };
 
 Node* Tree::CreateTree(){
@@ -86,3 +85,9 @@ void Tree::show(){
     conversion(root);
 }
 
+int main(){
+    Tree T;
+    T.MakeTree();
+    T.show();
+    return 0;
+}
