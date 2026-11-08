@@ -118,3 +118,57 @@ void StudentBST::searchStudent()
     }
 }
 
+// Find minimum node in a subtree
+Node* StudentBST::findMin(Node *root)
+{
+    while (root != NULL && root->left != NULL)
+        root = root->left;
+    return root;
+}
+
+// Delete student record
+Node* StudentBST::deleteNode(Node *root, int r)
+{
+    if (root == NULL)
+        return root;
+    if (r < root->rollNo)
+        root->left = deleteNode(root->left, r);
+    else if (r > root->rollNo)
+        root->right = deleteNode(root->right, r);
+    else
+    {
+        if (root->left == NULL)
+        {
+            Node *temp = root->right;
+            delete root;
+            return temp;
+        }
+        else if (root->right == NULL)
+        {
+            Node *temp = root->left;
+            delete root;
+            return temp;
+        }
+        Node *temp = findMin(root->right);
+        root->rollNo = temp->rollNo;
+        root->name = temp->name;
+        root->marks = temp->marks;
+        root->right = deleteNode(root->right, temp->rollNo);
+    }
+    return root;
+}
+
+void StudentBST::deleteStudent()
+{
+    int r;
+    cout << "Enter Roll Number to delete: ";
+    cin >> r;
+    if (search(root, r) == NULL)
+        cout << "Student record not found.\n";
+    else
+    {
+        root = deleteNode(root, r);
+        cout << "Student record deleted successfully.\n";
+    }
+}
+
