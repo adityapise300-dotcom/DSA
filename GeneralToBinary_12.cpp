@@ -56,3 +56,33 @@ void Tree::MakeTree(){
     root = CreateTree();
 }
 
+void Tree::conversion(Node*node){
+    if(node==NULL){
+        return;
+    }
+
+    cout<<"\nNode: "<<node->data;
+    if(node->left!=NULL){
+        cout<<"\nAt left of Node: "<<node->left->data;
+    }else{
+        cout<<"\nNothing on left";
+    }
+    if(node->right!=NULL){
+        cout<<"\nAt Right of Node: "<<node->right->data;
+    }else{
+        cout<<"\nNothing on right";
+    }
+    cout<<endl;
+
+    conversion(node->left);
+    conversion(node->right);
+}
+
+void Tree::show(){
+    if(root==NULL){
+        cout<<"\nList is Empty";
+        return;
+    }
+    conversion(root);
+}
+
