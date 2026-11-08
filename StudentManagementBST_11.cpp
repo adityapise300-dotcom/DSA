@@ -27,3 +27,18 @@ public:
     void deleteStudent();
 };
 
+// Node constructor
+Node::Node(int r, string n, float m)
+{
+    rollNo = r;
+    name = n;
+    marks = m;
+    left = right = NULL;
+}
+
+// BST constructor
+StudentBST::StudentBST()
+{
+    root = NULL;
+}
+
