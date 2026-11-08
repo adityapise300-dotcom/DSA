@@ -91,3 +91,30 @@ void StudentBST::displayStudents()
         displayInorder(root);
 }
 
+// Search student by roll number
+Node* StudentBST::search(Node *root, int r)
+{
+    if (root == NULL || root->rollNo == r)
+        return root;
+    if (r < root->rollNo)
+        return search(root->left, r);
+    return search(root->right, r);
+}
+
+void StudentBST::searchStudent()
+{
+    int r;
+    cout << "Enter Roll Number to search: ";
+    cin >> r;
+    Node *temp = search(root, r);
+    if (temp == NULL)
+        cout << "Student record not found.\n";
+    else
+    {
+        cout << "Student Found!\n";
+        cout << "Roll No: " << temp->rollNo << endl;
+        cout << "Name: " << temp->name << endl;
+        cout << "Marks: " << temp->marks << endl;
+    }
+}
+
