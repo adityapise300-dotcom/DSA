@@ -27,3 +27,32 @@ class Tree{
      void distroy(Node*node);
 };
 
+Node* Tree::CreateTree(){
+    int val,n;
+
+    cout<<"\nEnter the data of node: ";
+    cin>>val;
+
+    cout<<"\nEnter the childrens of this Node: ";
+    cin>>n;
+
+    Node*node = new Node(val);
+    Node*previous=NULL;
+
+    for(int i=0;i<n;i++){
+        Node*child = CreateTree();
+
+        if(node->left!=NULL){
+            node->left = child;
+        }else{
+            previous->right = child;
+        }
+        previous = child;
+    }
+    return node;
+}
+
+void Tree::MakeTree(){
+    root = CreateTree();
+}
+
