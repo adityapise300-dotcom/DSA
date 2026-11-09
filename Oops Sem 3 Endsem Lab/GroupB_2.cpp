@@ -55,22 +55,6 @@ class complex{
            return temp;
         }
 
-        friend complex operator/(complex c1, complex c2){
-           complex temp;
-
-           float dinominater = (c2.real*c2.real) + (c2.imag*c2.imag);
-
-           if(dinominater==0){
-            throw runtime_error("Division by zero");
-           }
-
-           temp.real = ((c1.real*c2.real) + (c1.imag*c2.imag)) / dinominater;
-
-           temp.imag = ((c1.imag*c2.real) - (c1.real*c2.imag)) / dinominater;
-
-           return temp;
-        }
-
         friend istream& operator>>(istream& in, complex& c){
             cout<<"Enter the real part: "<<endl;
             in>>c.real;
@@ -94,3 +78,35 @@ class complex{
         }
 };
 
+
+
+int main(){
+    complex c1, c2, result;
+
+    cout<<"Enter First Complex Number:"<<endl;
+    cin>>c1;
+
+    cout<<"\nEnter Second Complex Number:"<<endl;
+    cin>>c2;
+
+    cout<<"\nFirst Complex Number: "<<c1;
+    cout<<"\nSecond Complex Number: "<<c2;
+
+    result = c1 + c2;
+    cout<<"\nAddition: "<<result;
+
+    result = c1 - c2;
+    cout<<"\nSubtraction: "<<result;
+
+    result = c1 * c2;
+    cout<<"\nMultiplication: "<<result;
+
+    try{
+        result = c1 / c2;
+        cout<<"\nDivision: " <<result;
+    }catch(runtime_error &e){
+        cout<<"\nDivision: " <<e.what();
+    }
+
+    return 0;
+}
