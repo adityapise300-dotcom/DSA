@@ -30,4 +30,13 @@ class complex{
             return temp;
         }
 
+        friend complex operator*(complex c1, complex c2){
+            complex temp;
+
+            temp.real = (c1.real*c2.real) - (c1.imag*c2.imag);
+            temp.imag = (c1.real*c2.imag) + (c1.imag*c2.real);
+
+            return temp;
+        }
+
         
