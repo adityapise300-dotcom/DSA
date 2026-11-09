@@ -24,3 +24,24 @@ class ATM{
             cout<<"welcome to the banking system"<<endl;
         }
 };
+
+int main(){
+    int entry;
+    ATM A;
+
+    cout<<"Welcome to the ATM"<<endl;
+    cout<<"Enter your correct pin: ";
+    cin>>entry;
+
+    try{
+        A.verifyPin(entry);
+    }catch(invalid_argument &e){
+        cout<<"\nError: "<<e.what()<<endl;
+    }catch(runtime_error &e){
+        cout<<"\nError: "<<e.what()<<endl;
+    }catch(...){
+        cout<<"\nInvalid error occured"<<endl;
+    }
+
+    return 0;
+}
