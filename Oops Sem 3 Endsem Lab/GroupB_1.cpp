@@ -26,4 +26,13 @@ class OnlinePayment
     }
 
     // Net Banking Payment
-    
+    void payment(int amount, string bank, string account)
+    {
+        cout<<"\nPayment Mode: Net Banking"<<endl;
+        cout<<"Bank Name: "<<bank<<endl;
+        cout<<"Account Number: "<<account<<endl;
+        cout<<"Amount Paid: Rs. "<<amount<<endl;
+        cout<<"Payment Successful!"<<endl;
+    }
+};
+
