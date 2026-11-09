@@ -36,3 +36,65 @@ class OnlinePayment
     }
 };
 
+int main()
+{
+    OnlinePayment obj;
+
+    int choice, amount;
+
+    cout<<"===== ONLINE SHOPPING PAYMENT ====="<<endl;
+
+    cout<<"Enter Order Amount: ";
+    cin>>amount;
+
+    cout<<"\nSelect Payment Method:"<<endl;
+    cout<<"1. UPI Payment"<<endl;
+    cout<<"2. Card Payment"<<endl;
+    cout<<"3. Net Banking"<<endl;
+
+    cout<<"Enter your choice: ";
+    cin>>choice;
+
+    if(choice == 1)
+    {
+        string upi;
+        cout<<"Enter UPI ID: ";
+        cin>>upi;
+
+        obj.payment(amount, upi);
+    }
+
+    else if(choice == 2)
+    {
+        long long card;
+        string name;
+
+        cout<<"Enter Card Number: ";
+        cin>>card;
+
+        cout<<"Enter Card Holder Name: ";
+        cin>>name;
+
+        obj.payment(amount, card, name);
+    }
+
+    else if(choice == 3)
+    {
+        string bank, account;
+
+        cout<<"Enter Bank Name: ";
+        cin>>bank;
+
+        cout<<"Enter Account Number: ";
+        cin>>account;
+
+        obj.payment(amount, bank, account);
+    }
+
+    else
+    {
+        cout<<"Invalid Choice!"<<endl;
+    }
+
+    return 0;
+}
