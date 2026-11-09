@@ -39,4 +39,20 @@ class complex{
             return temp;
         }
 
+        friend complex operator/(complex c1, complex c2){
+           complex temp;
+
+           float dinominater = (c2.real*c2.real) + (c2.imag*c2.imag);
+
+           if(dinominater==0){
+            throw runtime_error("Division by zero");
+           }
+
+           temp.real = ((c1.real*c2.real) + (c1.imag*c2.imag)) / dinominater;
+
+           temp.imag = ((c1.imag*c2.real) - (c1.real*c2.imag)) / dinominater;
+
+           return temp;
+        }
+
         
