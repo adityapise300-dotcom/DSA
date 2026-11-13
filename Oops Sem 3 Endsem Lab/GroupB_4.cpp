@@ -37,3 +37,46 @@ void display(T stack[], int top){
     }
 }
 
+template<class T>
+void Operatins(T stack[], int &top, int size){
+    int choice;
+    T value;
+
+    do
+    {
+        cout<<"\n1. Push";
+        cout<<"\n2. Pop";
+        cout<<"\n3. Display";
+        cout<<"\n4. Exit";
+
+        cout<<"\nEnter your choice: ";
+        cin>>choice;
+
+        switch(choice)
+        {
+            case 1:
+                cout<<"Enter element: ";
+                cin>>value;
+
+                push(stack, top, size, value);
+                break;
+
+            case 2:
+                pop(stack, top);
+                break;
+
+            case 3:
+                display(stack, top);
+                break;
+
+            case 4:
+                cout<<"Exiting..."<<endl;
+                break;
+
+            default:
+                cout<<"Invalid Choice!"<<endl;
+        }
+
+    }while(choice != 4);
+}
+
