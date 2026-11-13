@@ -26,3 +26,19 @@ void printsalary(employee* emp){
     cout<<"Salary = "<<emp->calculate()<<endl;
 }
 
+int main(){
+    employee E;
+    manager M;
+    developer D;
+
+    cout<<"Employee Salary: ";
+    printsalary(&E);
+
+    cout<<"Manager Salary: ";
+    printsalary(&M);
+
+    cout<<"Developer Salary: ";
+    printsalary(&D);
+
+    return 0;
+}
