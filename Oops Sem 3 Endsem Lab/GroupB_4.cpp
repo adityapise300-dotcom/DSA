@@ -24,3 +24,16 @@ void pop(T stack[], int &top){
     }
 }
 
+template<class T>
+void display(T stack[], int top){
+    if(top==-1){
+        cout<<"Stack is empty";
+        return;
+    }
+
+    cout<<"Current stack is: ";
+    for(int i=top; i>=0; i--){
+        cout<<stack[i]<<" ";
+    }
+}
+
