@@ -80,3 +80,44 @@ void Operatins(T stack[], int &top, int size){
     }while(choice != 4);
 }
 
+int main(){
+    int intStack[5];
+    char charStack[5];
+    
+    int intTop = -1;
+    int charTop = -1;
+
+    int choice;
+
+    do
+    {
+        cout<<"\n===== STACK IMPLEMENTATION =====";
+        cout<<"\n1. Integer Stack";
+        cout<<"\n2. Character Stack";
+        cout<<"\n3. Exit";
+
+        cout<<"\nEnter your choice: ";
+        cin>>choice;
+
+        switch(choice)
+        {
+            case 1:
+                Operatins(intStack, intTop, 5);
+                break;
+
+            case 2:
+                Operatins(charStack, charTop, 5);
+                break;
+
+            case 3:
+                cout<<"Program Terminated!"<<endl;
+                break;
+
+            default:
+                cout<<"Invalid Choice!"<<endl;
+        }
+
+    }while(choice != 3);
+
+    return 0;
+}
