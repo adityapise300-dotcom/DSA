@@ -14,3 +14,13 @@ void push(T stack[], int &top, int size, T value){
     }
 }
 
+template<class T>
+void pop(T stack[], int &top){
+    if(top==-1){
+        cout<<"Stact Underflow !!"<<endl;
+    }else{
+        cout<<"Element "<<stack[top]<<" was removed successfully !"<<endl;
+        top--;
+    }
+}
+
