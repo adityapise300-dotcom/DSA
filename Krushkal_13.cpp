@@ -65,6 +65,7 @@ void Graph::krushkal(){
         }
 
         if(u==-1){
+            cout<<"Graph is disconnected"<<endl;
             break;
         }
 
