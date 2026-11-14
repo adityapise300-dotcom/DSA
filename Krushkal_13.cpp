@@ -86,3 +86,9 @@ void Graph::krushkal(){
     }
 }
 
+int main(){
+    Graph g;
+    g.create();
+    g.krushkal();
+    return 0;
+}
