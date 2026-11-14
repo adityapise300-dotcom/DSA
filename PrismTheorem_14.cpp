@@ -26,3 +26,41 @@ void Graph::Create(){
     }
 }
 
+void Graph::Prims(){
+    int minCost = 0;
+    int edges = 0;
+    int visited[MAX] = {0};
+
+    visited[0] = 1;
+
+    while(edges<n-1){
+        int min = INF;
+        int u = -1;
+        int v = -1;
+
+        for(int i=0;i<n;i++){
+            if(visited[i]){
+                for(int j=0;j<n;j++){
+                    if(!visited[j] && cost[i][j]<min){
+                        min = cost[i][j];
+                        u = i;
+                        v = j;
+                    }
+                }
+            }
+        }
+
+        if(u==-1){
+            cout<<"Graph is disconnected"<<endl;
+            return;
+        }
+
+        cout<<u+1<<" - "<<v+1<<" : "<<min<<endl;
+        minCost += min;
+        visited[v] = 1;
+        edges++;
+    }
+
+    cout<<"Total cost is : "<<minCost<<endl;
+}
+
