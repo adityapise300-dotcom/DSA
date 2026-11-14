@@ -64,3 +64,9 @@ void Graph::Prims(){
     cout<<"Total cost is : "<<minCost<<endl;
 }
 
+int main(){
+    Graph g;
+    g.Create();
+    g.Prims();
+    return 0;
+}
