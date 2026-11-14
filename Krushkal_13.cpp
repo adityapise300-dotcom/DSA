@@ -38,3 +38,51 @@ void Graph::unite(int u,int v){
     parent[u] = v;
 }
 
+void Graph::krushkal(){
+    int minCost = 0;
+    int edges = 0;
+    int v,u,min;
+
+    for(int i=0;i<n;i++){
+        parent[i] = i;
+    }
+
+    cout<<"Road 1 - Road 2 : Cost."<<endl;
+    while(edges<n-1){
+        min = 999;
+        u=-1;
+        v=-1;
+
+        for(int i=0;i<n;i++){
+            for(int j=i+1;j<n;j++){
+                if(cost[i][j]<min){
+                    min = cost[i][j];
+                    u=i;
+                    v=j;
+                }
+            }
+        }
+
+        if(u==-1){
+            break;
+        }
+
+        int SetU = find(u);
+        int SetV = find(v);
+
+        if(SetU!=SetV){
+            cout<<u+1<<" - "<<v+1<<" : "<<min<<endl;
+            minCost += min;
+            unite(SetU,SetV);
+            edges++;
+        }
+
+        cost[u][v] = cost[v][u] = 999;
+    }
+    if(edges!=n-1){
+        cout<<"Graph does not exist"<<endl;
+    }else{
+        cout<<"Total Cost : "<<minCost;
+    }
+}
+
