@@ -27,3 +27,14 @@ void Graph::create(){
     }
 }
 
+int Graph::find(int v){
+    while(parent[v]!=v){
+        v = parent[v];
+    }
+    return v;
+}
+
+void Graph::unite(int u,int v){
+    parent[u] = v;
+}
+
