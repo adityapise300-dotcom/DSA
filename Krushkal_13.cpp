@@ -13,3 +13,17 @@ class Graph{
         void krushkal();
 };
 
+void Graph::create(){
+    cout<<"Enter the number of cites: "<<endl;
+    cin>>n;
+
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            cin>>cost[i][j];
+            if(i!=j&&cost[i][j]==0){
+                cost[i][j]=99;
+            }
+        }
+    }
+}
+
