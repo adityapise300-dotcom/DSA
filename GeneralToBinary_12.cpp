@@ -41,7 +41,7 @@ Node* Tree::CreateTree(){
     for(int i=0;i<n;i++){
         Node*child = CreateTree();
 
-        if(node->left!=NULL){
+        if(node->left==NULL){
             node->left = child;
         }else{
             previous->right = child;
