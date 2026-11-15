@@ -1,61 +1,82 @@
 #include<iostream>
+#include<string>
+#include<stack>
 using namespace std;
 
-struct Node{
-    int data;
-    Node*next;
-};
-
-class Stack{
-    Node*head = NULL;
+class infToPost{
+    stack<char> s;
+    string postfix = "";
     public:
-        void push();
-        void pop();
-        void display();
+        int precesion(char op);
+        bool isoperand(char ch);
+        string conversion(string infix);
 };
 
-void Stack::push(){
-    Node*newNode = new Node;
-    int val;
-    cout<<"\nEnter the Value to push: ";
-    cin>>val;
-    newNode->data = val;
-    if(head == NULL){
-        head = newNode;
+int infToPost :: precesion(char op){
+    if(op=='^'){
+        return 3;
+    }else if(op=='*' || op=='/'){
+        return 2;
+    }else if(op=='+' || op=='-'){
+        return 1;
     }else{
-        newNode->next = head;
-        head = newNode;
+        return 0;
     }
-    cout<<"\nElement "<<head->data<<" is Pushed successfully.";
 }
 
-void Stack::pop(){
-    cout<<"\n\nElement "<<head->data<<" is deleted successfully.";
-    Node*temp = head;
-    head = head->next;
-    delete temp;
+bool infToPost :: isoperand(char ch){
+    if(ch>='A' &&ch<='Z'){
+        return true;
+    }
+    if(ch>='a'&&ch<='z'){
+        return true;
+    }
+
+    return false;
 }
 
-void Stack::display(){
-    cout<<"\nCurrent Stack(top to bottom) is like: ";
-    if(head==NULL){
-        cout<<"Stack is Empty";
-        return;
+string infToPost :: conversion(string infix){
+    postfix = "";
+    for(int i=0;i<infix.length();i++){
+        char ch = infix[i];
+
+        if(isoperand(ch)){
+            postfix+=ch;
+        }else if(ch=='('){
+            s.push(ch);
+        }else if(ch==')'){
+            while(!s.empty() && s.top()!='('){
+                postfix+=s.top();
+                s.pop();
+            }
+
+            if(!s.empty()){
+                s.pop();
+            }
+        }else{
+            while(!s.empty() && s.top()!='(' && precesion(ch)<=precesion(s.top())){
+                postfix +=s.top();
+            }
+            s.push(ch);
+        }
     }
-    Node*temp = head;
-    while(temp!=NULL){
-        cout<<temp->data<<" ";
-        temp=temp->next;
+
+    while(!s.empty()){
+        postfix+=s.top();
+        s.pop();
     }
+
+    return postfix;
 }
 
 int main(){
-    Stack S;
-    S.push();
-    S.push();
-    S.push();
-    S.pop();
-    S.display();
+    infToPost I;
+    string infix = "";
+    cout<<"\nEnter the infix string: ";
+    cin>>infix;
+    string result = I.conversion(infix);
+    cout<<endl<<result;
 
     return 0;
 }
+
