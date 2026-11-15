@@ -1,54 +1,55 @@
 #include<iostream>
 using namespace std;
-#define MAX 20
+#define M 20
 
-class Graph{
-    int cost[MAX][MAX];
-    int parent[MAX];
+class Tree{
+    int cost[M][M];
+    int parent[M];
     int n;
     public:
         void create();
         int find(int v);
-        void unite(int u, int v);
+        void unite(int u,int v);
         void krushkal();
 };
 
-void Graph::create(){
-    cout<<"Enter the number of cites: "<<endl;
+void Tree :: create(){
+    cout<<"Enter the number of cities: ";
     cin>>n;
-
-    cout<<"Enter the adjecency matrix: ";
+    cout<<"\nEnter the adjecency matrix: ";
     for(int i=0;i<n;i++){
         for(int j=0;j<n;j++){
             cin>>cost[i][j];
             if(i!=j&&cost[i][j]==0){
-                cost[i][j]=99;
+                cost[i][j] = 99;
             }
         }
     }
 }
 
-int Graph::find(int v){
+int Tree::find(int v){
     while(parent[v]!=v){
         v = parent[v];
     }
     return v;
 }
 
-void Graph::unite(int u,int v){
+void Tree::unite(int u,int v){
     parent[u] = v;
 }
 
-void Graph::krushkal(){
+void Tree::krushkal(){
     int minCost = 0;
     int edges = 0;
-    int v,u,min;
+    int u,v,min;
 
     for(int i=0;i<n;i++){
         parent[i] = i;
     }
 
-    cout<<"Road 1 - Road 2 : Cost."<<endl;
+    cout<<"\nMinimum Cost Calculation";
+    cout<<"\nRoad1 - Road2 : Cost"<<endl;
+
     while(edges<n-1){
         min = 999;
         u=-1;
@@ -82,15 +83,16 @@ void Graph::krushkal(){
         cost[u][v] = cost[v][u] = 999;
     }
     if(edges!=n-1){
-        cout<<"Graph does not exist"<<endl;
+        cout<<"Graph Does not exist"<<endl;
+        return;
     }else{
-        cout<<"Total Cost : "<<minCost;
+        cout<<"Total Cost = "<<minCost<<endl;
     }
 }
 
 int main(){
-    Graph g;
-    g.create();
-    g.krushkal();
+    Tree T;
+    T.create();
+    T.krushkal();
     return 0;
 }

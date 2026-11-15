@@ -1,122 +1,98 @@
 #include<iostream>
-#include<string>
 using namespace std;
+#define M 20
 
-class Parlour{
-    int arr[100];
-    int front;
-    int rear;
-    int M;
+class Tree{
+    int cost[M][M];
+    int parent[M];
+    int n;
     public:
-        Parlour(int size){
-            M = size;
-            front = -1;
-            rear = -1;
-        }
-        void placeorder();
-        void serveorder();
-        void showorders();
+        void create();
+        int find(int v);
+        void unite(int u,int v);
+        void krushkal();
 };
 
-void Parlour::placeorder(){
-    if((rear+1)%M==front){
-        cout<<"Orders overflow"<<endl;
-        return;
-    }
-
-    int x;
-    cout<<"\nEnter the order id:  ";
-    cin>>x;
-
-    if(rear == -1){
-        front = 0;
-        rear = 0;
-    }else{
-        rear = (rear+1)%M;
-    }
-
-    arr[rear] = x;
-
-    cout<<" Order Placed !";
-}
-
-void Parlour::serveorder(){
-    if(front == -1){
-        cout<<"\nOrders underflow";
-        return;
-    }
-
-    cout<<"\nOrder "<<arr[front]<<" Served !";
-
-    if(front==rear){
-        front=-1;
-        rear=-1;
-    }else{
-        front = (front+1)%M;
+void Tree :: create(){
+    cout<<"Enter the number of cities: ";
+    cin>>n;
+    cout<<"\nEnter the adjecency matrix: ";
+    for(int i=0;i<n;i++){
+        for(int j=0;j<n;j++){
+            cin>>cost[i][j];
+            if(i!=j&&cost[i][j]==0){
+                cost[i][j] = 99;
+            }
+        }
     }
 }
 
-void Parlour::showorders(){
-    if(front == -1){
-        cout<<"\nNo Pending Orders Exist";
-        return;
+int Tree::find(int v){
+    while(parent[v]!=v){
+        v = parent[v];
+    }
+    return v;
+}
+
+void Tree::unite(int u,int v){
+    parent[u] = v;
+}
+
+void Tree::krushkal(){
+    int minCost = 0;
+    int edges = 0;
+    int u,v,min;
+
+    for(int i=0;i<n;i++){
+        parent[i] = i;
     }
 
-    int i = front;
+    cout<<"\nMinimum Cost Calculation";
+    cout<<"\nRoad1 - Road2 : Cost"<<endl;
 
-    cout<<"Currently Pending orders are : ";
+    while(edges<n-1){
+        min = 999;
+        u=-1;
+        v=-1;
 
-    while(true){
-        cout<<arr[i]<<" ";
+        for(int i=0;i<n;i++){
+            for(int j=i+1;j<n;j++){
+                if(cost[i][j]<min){
+                    min = cost[i][j];
+                    u=i;
+                    v=j;
+                }
+            }
+        }
 
-        if(i == rear){
+        if(u==-1){
+            cout<<"Graph is disconnected"<<endl;
             break;
         }
 
-        i=(i+1)%M;
+        int SetU = find(u);
+        int SetV = find(v);
+
+        if(SetU!=SetV){
+            cout<<u+1<<" - "<<v+1<<" : "<<min<<endl;
+            minCost += min;
+            unite(SetU,SetV);
+            edges++;
+        }
+
+        cost[u][v] = cost[v][u] = 999;
+    }
+    if(edges!=n-1){
+        cout<<"Graph Does not exist"<<endl;
+        return;
+    }else{
+        cout<<"Total Cost = "<<minCost<<endl;
     }
 }
 
 int main(){
-    int size, choice;
-
-    cout<<"Enter the maximum number of orders: ";
-    cin>>size;
-
-    Parlour p(size);
-
-    do{
-        cout<<"\n\n----- PARLOUR ORDER MANAGEMENT -----";
-        cout<<"\n1. Place Order";
-        cout<<"\n2. Serve Order";
-        cout<<"\n3. Show Pending Orders";
-        cout<<"\n4. Exit";
-
-        cout<<"\n\nEnter your choice: ";
-        cin>>choice;
-
-        switch(choice){
-            case 1:
-                p.placeorder();
-                break;
-
-            case 2:
-                p.serveorder();
-                break;
-
-            case 3:
-                p.showorders();
-                break;
-
-            case 4:
-                cout<<"\nExiting Program...";
-                break;
-
-            default:
-                cout<<"\nInvalid Choice!";
-        }
-
-    }while(choice != 4);
-
+    Tree T;
+    T.create();
+    T.krushkal();
     return 0;
 }
