@@ -3,55 +3,50 @@
 using namespace std;
 
 class Parlour{
-    int queue[100];
-    int front, rear;
+    int arr[100];
+    int front;
+    int rear;
     int M;
-
     public:
-        Parlour(int size);
-
+        Parlour(int size){
+            M = size;
+            front = -1;
+            rear = -1;
+        }
         void placeorder();
         void serveorder();
-        void displayorder();
+        void showorders();
 };
 
-Parlour::Parlour(int size){
-    M = size;
-    front = -1;
-    rear = -1;
-}
-
 void Parlour::placeorder(){
-    
-    int order;
-
-    if((rear+1)%M == front){
-        cout<<"Queue is full !!";
+    if((rear+1)%M==front){
+        cout<<"Orders overflow"<<endl;
         return;
     }
 
-    cout<<"Enter the order: ";
-    cin>>order;
+    int x;
+    cout<<"\nEnter the order id:  ";
+    cin>>x;
 
-    if(front==-1){
-        rear = 0;
+    if(rear == -1){
         front = 0;
+        rear = 0;
     }else{
         rear = (rear+1)%M;
     }
 
-    queue[rear] = order;
+    arr[rear] = x;
 
-    cout<<"Order "<<order<<" was placed Successfully"<<endl; 
+    cout<<" Order Placed !";
 }
 
 void Parlour::serveorder(){
-    if(front==-1){
-        cout<<"No orders to serve"<<endl;
+    if(front == -1){
+        cout<<"\nOrders underflow";
         return;
     }
 
-    cout<<"Order "<<queue[front]<<" was served!"<<endl;
+    cout<<"\nOrder "<<arr[front]<<" Served !";
 
     if(front==rear){
         front=-1;
@@ -61,49 +56,43 @@ void Parlour::serveorder(){
     }
 }
 
-void Parlour::displayorder(){
-    if(front==-1){
-        cout<<"No orders remaining"<<endl;
+void Parlour::showorders(){
+    if(front == -1){
+        cout<<"\nNo Pending Orders Exist";
         return;
     }
 
-    cout << "Pending Orders"<<endl;
-
     int i = front;
 
-    while(true){
-        cout<<queue[i]<<" ";
+    cout<<"Currently Pending orders are : ";
 
-        if(i==rear){
+    while(true){
+        cout<<arr[i]<<" ";
+
+        if(i == rear){
             break;
         }
 
         i=(i+1)%M;
     }
-
-    cout<<endl;
 }
 
 int main(){
     int size, choice;
 
-    cout<<"Enter the size of queue: ";
+    cout<<"Enter the maximum number of orders: ";
     cin>>size;
-
-    if(size<=0 || size>100){
-        cout<<"Invalid queue size!"<<endl;
-        return 0;
-    }
 
     Parlour p(size);
 
     do{
-        cout<<"\n\n1. Place Order";
+        cout<<"\n\n----- PARLOUR ORDER MANAGEMENT -----";
+        cout<<"\n1. Place Order";
         cout<<"\n2. Serve Order";
-        cout<<"\n3. Display Orders";
+        cout<<"\n3. Show Pending Orders";
         cout<<"\n4. Exit";
 
-        cout<<"\nEnter your choice: ";
+        cout<<"\n\nEnter your choice: ";
         cin>>choice;
 
         switch(choice){
@@ -116,18 +105,18 @@ int main(){
                 break;
 
             case 3:
-                p.displayorder();
+                p.showorders();
                 break;
 
             case 4:
-                cout<<"Exiting..."<<endl;
+                cout<<"\nExiting Program...";
                 break;
 
             default:
-                cout<<"Invalid choice!"<<endl;
+                cout<<"\nInvalid Choice!";
         }
 
-    }while(choice!=4);
+    }while(choice != 4);
 
     return 0;
 }
