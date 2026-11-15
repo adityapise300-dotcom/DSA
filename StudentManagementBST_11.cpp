@@ -1,254 +1,201 @@
-#include <iostream>
+#include<iostream>
+#include<string>
 using namespace std;
 
-class Node
-{
-public:
-    int rollNo;
+class Node{
+   public:
+    int roll;
     string name;
     float marks;
-    Node *left, *right;
-    Node(int r, string n, float m);
+    Node*left;
+    Node*right;
+    Node(int r,string n,float m){
+        roll = r;
+        name = n;
+        marks = m;
+        right = left = NULL;
+    }
 };
 
-class StudentBST
-{
-    Node *root;
-public:
-    StudentBST();
-    Node* insert(Node *root, int r, string n, float m);
-    void addStudent();
-    void displayInorder(Node *root);
-    void displayStudents();
-    Node* search(Node *root, int r);
-    void searchStudent();
-    Node* findMin(Node *root);
-    Node* deleteNode(Node *root, int r);
-    void deleteStudent();
+class Tree{
+    Node*root;
+    public:
+     Tree(){
+        root=NULL;
+     }
+     Node* create(Node*root,int r,string n,float m);
+     void createnode();
+     void display(Node*root);
+     void displayinorder();
+     Node* search(Node*root,int r);
+     void searchnode();
+     Node* findMin(Node*root);
+     Node* deletee(Node*root,int r);
+     void deletenode();
 };
 
-// Node constructor
-Node::Node(int r, string n, float m)
-{
-    rollNo = r;
-    name = n;
-    marks = m;
-    left = right = NULL;
-}
-
-// BST constructor
-StudentBST::StudentBST()
-{
-    root = NULL;
-}
-
-// Insert student record
-Node* StudentBST::insert(Node *root, int r, string n, float m)
-{
-    if (root == NULL)
-        return new Node(r, n, m);
-    if (r < root->rollNo)
-        root->left = insert(root->left, r, n, m);
-    else if (r > root->rollNo)
-        root->right = insert(root->right, r, n, m);
-    else
-        cout << "Roll number already exists!\n";
+Node* Tree :: create(Node*root,int r,string n,float m){
+    if(root==NULL){
+        return new Node(r,n,m);
+    }
+    if(r<root->roll){
+        root->left = create(root->left,r,n,m);
+    }else if(r>root->roll){
+        root->right = create(root->right,r,n,m);
+    }else{
+        cout<<"Element already exists";
+    }
     return root;
 }
 
-void StudentBST::addStudent()
-{
+void Tree::createnode(){
     int r;
     string n;
     float m;
-    cout << "Enter Roll Number: ";
-    cin >> r;
-    cout << "Enter Name: ";
-    cin >> n;
-    cout << "Enter Marks: ";
-    cin >> m;
-    root = insert(root, r, n, m);
+    cout<<"Enter Roll No: ";
+    cin>>r;
+    cout<<"Enter name: ";
+    cin>>n;
+    cout<<"Enter Marks: ";
+    cin>>m;
+    root = create(root,r,n,m);
 }
 
-// Display records in ascending order of roll number
-void StudentBST::displayInorder(Node *root)
-{
-    if (root != NULL)
-    {
-        displayInorder(root->left);
-        cout << "Roll No: " << root->rollNo
-             << ", Name: " << root->name
-             << ", Marks: " << root->marks << endl;
-        displayInorder(root->right);
+void Tree::display(Node*root){
+    if(root!=NULL){
+        display(root->left);
+        cout<<"Roll no: "<<root->roll;
+        cout<<"Name: "<<root->name;
+        cout<<"marks: "<<root->marks;
+        display(root->right);
     }
 }
 
-void StudentBST::displayStudents()
-{
-    if (root == NULL)
-        cout << "No student records found.\n";
-    else
-        displayInorder(root);
+void Tree ::displayinorder(){
+    if(root==NULL){
+        cout<<"System is empty";
+    }else{
+        display(root);
+    }
 }
 
-// Search student by roll number
-Node* StudentBST::search(Node *root, int r)
-{
-    if (root == NULL || root->rollNo == r)
+Node* Tree::search(Node*root,int r){
+    if(root==NULL || r==root->roll){
         return root;
-    if (r < root->rollNo)
-        return search(root->left, r);
-    return search(root->right, r);
-}
-
-void StudentBST::searchStudent()
-{
-    int r;
-    cout << "Enter Roll Number to search: ";
-    cin >> r;
-    Node *temp = search(root, r);
-    if (temp == NULL)
-        cout << "Student record not found.\n";
-    else
-    {
-        cout << "Student Found!\n";
-        cout << "Roll No: " << temp->rollNo << endl;
-        cout << "Name: " << temp->name << endl;
-        cout << "Marks: " << temp->marks << endl;
+    }
+    if(r<root->roll){
+        return search(root->left,r);
+    }else{
+        return search(root->right,r);
     }
 }
 
-// Find minimum node in a subtree
-Node* StudentBST::findMin(Node *root)
-{
-    while (root != NULL && root->left != NULL)
+void Tree::searchnode(){
+    int r;
+    cout<<"Enter Roll Number to search: ";
+    cin>>r;
+    if(search(root,r)==NULL){
+        cout<<"Element not found";
+    }else{
+        Node*temp = search(root,r);
+        cout<<"Student Found";
+        cout<<"Roll no: "<<temp->roll;
+        cout<<"Name: "<<temp->name;
+        cout<<"Marks: "<<temp->marks;
+    }
+}
+
+Node* Tree::findMin(Node*root){
+    while(root!=NULL && root->left!=NULL){
         root = root->left;
+    }
     return root;
 }
 
-// Delete student record
-Node* StudentBST::deleteNode(Node *root, int r)
-{
-    if (root == NULL)
+Node* Tree::deletee(Node*root,int r){
+    if(root==NULL){
         return root;
-    if (r < root->rollNo)
-        root->left = deleteNode(root->left, r);
-    else if (r > root->rollNo)
-        root->right = deleteNode(root->right, r);
-    else
-    {
-        if (root->left == NULL)
-        {
-            Node *temp = root->right;
+    }
+    if(r<root->roll){
+        root->left = deletee(root->left,r);
+    }else if(r>root->roll){
+        root->right = deletee(root->right,r);
+    }else{
+        if(root->left==NULL){
+            Node*temp = root->right;
             delete root;
             return temp;
         }
-        else if (root->right == NULL)
-        {
-            Node *temp = root->left;
+
+        if(root->right==NULL){
+            Node*temp = root->left;
             delete root;
             return temp;
         }
-        Node *temp = findMin(root->right);
-        root->rollNo = temp->rollNo;
+
+        Node*temp = findMin(root->right);
+        root->roll = temp->roll;
         root->name = temp->name;
         root->marks = temp->marks;
-        root->right = deleteNode(root->right, temp->rollNo);
+        root->right = deletee(root->right,temp->roll);
     }
     return root;
 }
 
-void StudentBST::deleteStudent()
-{
+void Tree::deletenode(){
     int r;
-    cout << "Enter Roll Number to delete: ";
-    cin >> r;
-    if (search(root, r) == NULL)
-        cout << "Student record not found.\n";
-    else
-    {
-        root = deleteNode(root, r);
-        cout << "Student record deleted successfully.\n";
+    cout<<"Roll No to delete: ";
+    cin>>r;
+    if(search(root, r) == NULL){
+        cout<<"Nothing to delete";
+    }else{
+        root = deletee(root,r);
+        cout<<"Student record deleted Successfully";
     }
 }
 
-// Find minimum node in a subtree
-Node* StudentBST::findMin(Node *root)
-{
-    while (root != NULL && root->left != NULL)
-        root = root->left;
-    return root;
-}
-
-// Delete student record
-Node* StudentBST::deleteNode(Node *root, int r)
-{
-    if (root == NULL)
-        return root;
-    if (r < root->rollNo)
-        root->left = deleteNode(root->left, r);
-    else if (r > root->rollNo)
-        root->right = deleteNode(root->right, r);
-    else
-    {
-        if (root->left == NULL)
-        {
-            Node *temp = root->right;
-            delete root;
-            return temp;
-        }
-        else if (root->right == NULL)
-        {
-            Node *temp = root->left;
-            delete root;
-            return temp;
-        }
-        Node *temp = findMin(root->right);
-        root->rollNo = temp->rollNo;
-        root->name = temp->name;
-        root->marks = temp->marks;
-        root->right = deleteNode(root->right, temp->rollNo);
-    }
-    return root;
-}
-
-void StudentBST::deleteStudent()
-{
-    int r;
-    cout << "Enter Roll Number to delete: ";
-    cin >> r;
-    if (search(root, r) == NULL)
-        cout << "Student record not found.\n";
-    else
-    {
-        root = deleteNode(root, r);
-        cout << "Student record deleted successfully.\n";
-    }
-}
-
-int main()
-{
-    StudentBST bst;
+int main(){
+    Tree t;
     int choice;
-    do
-    {
-        cout << "\n--- Student Record Management System ---\n";
-        cout << "1. Add Student\n";
-        cout << "2. Display All Students\n";
-        cout << "3. Search Student\n";
-        cout << "4. Delete Student\n";
-        cout << "5. Exit\n";
-        cout << "Enter your choice: ";
-        cin >> choice;
-        switch (choice)
-        {
-            case 1: bst.addStudent(); break;
-            case 2: bst.displayStudents(); break;
-            case 3: bst.searchStudent(); break;
-            case 4: bst.deleteStudent(); break;
-            case 5: cout << "Exiting program.\n"; break;
-            default: cout << "Invalid choice!\n";
+
+    do{
+        cout<<"\n\n----- BINARY SEARCH TREE -----";
+        cout<<"\n1. Insert Student";
+        cout<<"\n2. Display Students (Inorder)";
+        cout<<"\n3. Search Student";
+        cout<<"\n4. Delete Student";
+        cout<<"\n5. Exit";
+
+        cout<<"\nEnter your choice: ";
+        cin>>choice;
+
+        switch(choice){
+
+            case 1:
+                t.createnode();
+                break;
+
+            case 2:
+                t.displayinorder();
+                break;
+
+            case 3:
+                t.searchnode();
+                break;
+
+            case 4:
+                t.deletenode();
+                break;
+
+            case 5:
+                cout<<"Exiting Program...";
+                break;
+
+            default:
+                cout<<"Invalid Choice!";
         }
-    } while (choice != 5);
+
+    }while(choice!=5);
+
     return 0;
 }
