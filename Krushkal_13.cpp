@@ -1,6 +1,7 @@
 #include<iostream>
 using namespace std;
 #define M 20
+#define INF 99
 
 class Tree{
     int cost[M][M];
@@ -21,7 +22,7 @@ void Tree :: create(){
         for(int j=0;j<n;j++){
             cin>>cost[i][j];
             if(i!=j&&cost[i][j]==0){
-                cost[i][j] = 99;
+                cost[i][j] = INF;
             }
         }
     }
@@ -51,7 +52,7 @@ void Tree::krushkal(){
     cout<<"\nRoad1 - Road2 : Cost"<<endl;
 
     while(edges<n-1){
-        min = 999;
+        min = INF;
         u=-1;
         v=-1;
 
@@ -80,7 +81,7 @@ void Tree::krushkal(){
             edges++;
         }
 
-        cost[u][v] = cost[v][u] = 999;
+        cost[u][v] = cost[v][u] = INF;
     }
     if(edges!=n-1){
         cout<<"Graph Does not exist"<<endl;
