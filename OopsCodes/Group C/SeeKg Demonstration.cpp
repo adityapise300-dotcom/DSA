@@ -2,63 +2,86 @@
 #include<fstream>
 using namespace std;
 
+class FileOperations {
+
+public:
+
+    // Write data into file
+    void writeData() {
+        ofstream fout("data.txt");
+
+        fout << "Hello World";
+
+        fout.close();
+
+        cout << "Data written successfully!\n";
+    }
+
+    // Read data from file
+    void readData() {
+        ifstream fin("data.txt");
+
+        char ch;
+
+        cout << "\nOriginal File Content: ";
+
+        while(fin.get(ch)) {
+            cout << ch;
+        }
+
+        // Using seekg()
+        fin.clear();
+        fin.seekg(6, ios::beg);
+
+        cout << "\n\nContent from position 6: ";
+
+        while(fin.get(ch)) {
+            cout << ch;
+        }
+
+        fin.close();
+    }
+
+    // Modify data using seekp()
+    void modifyData() {
+        fstream file("data.txt", ios::in | ios::out);
+
+        file.seekp(6, ios::beg);
+
+        file.put('C');
+
+        file.close();
+
+        cout << "\n\nData modified successfully!";
+    }
+
+    // Display modified data
+    void displayData() {
+        ifstream fin("data.txt");
+
+        char ch;
+
+        cout << "\nModified File Content: ";
+
+        while(fin.get(ch)) {
+            cout << ch;
+        }
+
+        fin.close();
+    }
+};
+
 int main() {
 
-    // Writing data into file
-    ofstream fout("data.txt");
+    FileOperations obj;
 
-    fout << "Hello World";
+    obj.writeData();
 
-    fout.close();
+    obj.readData();
 
-    cout << "Data written successfully!\n";
+    obj.modifyData();
 
-
-    // Reading data from file
-    ifstream fin("data.txt");
-
-    char ch;
-
-    cout << "\nOriginal File Content: ";
-
-    while(fin.get(ch)) {
-        cout << ch;
-    }
-
-
-    // Using seekg() to move read pointer
-    fin.clear();
-    fin.seekg(6, ios::beg);
-
-    cout << "\n\nContent from position 6: ";
-
-    while(fin.get(ch)) {
-        cout << ch;
-    }
-
-    fin.close();
-
-
-    // Using seekp() to modify data
-    fstream file("data.txt", ios::in | ios::out);
-
-    file.seekp(6, ios::beg);
-
-    file.put('C');
-
-    file.close();
-
-
-    // Display modified content
-    ifstream fin2("data.txt");
-
-    cout << "\n\nModified File Content: ";
-
-    while(fin2.get(ch)) {
-        cout << ch;
-    }
-
-    fin2.close();
+    obj.displayData();
 
     return 0;
 }
