@@ -1,171 +1,87 @@
-#include<iostream>
+
+#include <iostream>
+#include <stack>
 using namespace std;
 
-template<class T>
-class operations {
-    T stack[100];
-    int top = -1;
+template <class T>
+class Stack {
+private:
+    stack<T> s;
 
-    public:
+public:
+    void push(T value) {
+        s.push(value);
+        cout << "Element pushed successfully!\n";
+    }
 
-        void push(T value) {
-            if(top == 99) {
-                cout << "Stack Overflow !!" << endl;
-            }
-            else {
-                top++;
-                stack[top] = value;
-                cout << "Element added successfully !!" << endl;
-            }
+    void pop() {
+        if (isEmpty()) {
+            cout << "Stack is empty!\n";
+            return;
         }
 
-        void pop() {
-            if(isempty()) {
-                cout << "Stack is empty !!" << endl;
-            }
-            else {
-                cout << "Element " << stack[top] << " was deleted" << endl;
-                top--;
-            }
-        }
+        cout << "Popped element: " << s.top() << endl;
+        s.pop();
+    }
 
-        bool isempty() {
-            return top == -1;
-        }
+    bool isEmpty() {
+        return s.empty();
+    }
+
+    T top() {
+        return s.top();
+    }
 };
 
 int main() {
-    int choice, repeat, ch;
-
-    operations<int> S1;
-    operations<float> S2;
-    operations<char> S3;
+    Stack<int> s;
+    int choice, value;
 
     do {
-        cout << "\n----- Select Data Type -----";
-        cout << "\n1. Integer";
-        cout << "\n2. Float";
-        cout << "\n3. Character";
-        cout << "\nEnter your choice: ";
+        cout << "\n--- STACK OPERATIONS ---\n";
+        cout << "1. Push\n";
+        cout << "2. Pop\n";
+        cout << "3. Check if Stack is Empty\n";
+        cout << "4. Display Top Element\n";
+        cout << "5. Exit\n";
+
+        cout << "Enter your choice: ";
         cin >> choice;
 
-        switch(choice) {
-
-            case 1: {
-                int value;
-
-                cout << "\n----- Integer Stack -----";
-                cout << "\n1. Push";
-                cout << "\n2. Pop";
-                cout << "\n3. Check Empty";
-                cout << "\nEnter choice: ";
-                cin >> ch;
-
-                switch(ch) {
-                    case 1:
-                        cout << "Enter integer: ";
-                        cin >> value;
-                        S1.push(value);
-                        break;
-
-                    case 2:
-                        S1.pop();
-                        break;
-
-                    case 3:
-                        if(S1.isempty())
-                            cout << "Stack is empty";
-                        else
-                            cout << "Stack is not empty";
-                        break;
-
-                    default:
-                        cout << "Invalid choice!";
-                }
+        switch (choice) {
+            case 1:
+                cout << "Enter value to push: ";
+                cin >> value;
+                s.push(value);
                 break;
-            }
 
-            case 2: {
-                float value;
-
-                cout << "\n----- Float Stack -----";
-                cout << "\n1. Push";
-                cout << "\n2. Pop";
-                cout << "\n3. Check Empty";
-                cout << "\nEnter choice: ";
-                cin >> ch;
-
-                switch(ch) {
-                    case 1:
-                        cout << "Enter float: ";
-                        cin >> value;
-                        S2.push(value);
-                        break;
-
-                    case 2:
-                        S2.pop();
-                        break;
-
-                    case 3:
-                        if(S2.isempty())
-                            cout << "Stack is empty";
-                        else
-                            cout << "Stack is not empty";
-                        break;
-
-                    default:
-                        cout << "Invalid choice!";
-                }
+            case 2:
+                s.pop();
                 break;
-            }
 
-            case 3: {
-                char value;
-
-                cout << "\n----- Character Stack -----";
-                cout << "\n1. Push";
-                cout << "\n2. Pop";
-                cout << "\n3. Check Empty";
-                cout << "\nEnter choice: ";
-                cin >> ch;
-
-                switch(ch) {
-                    case 1:
-                        cout << "Enter character: ";
-                        cin >> value;
-                        S3.push(value);
-                        break;
-
-                    case 2:
-                        S3.pop();
-                        break;
-
-                    case 3:
-                        if(S3.isempty())
-                            cout << "Stack is empty";
-                        else
-                            cout << "Stack is not empty";
-                        break;
-
-                    default:
-                        cout << "Invalid choice!";
-                }
+            case 3:
+                if (s.isEmpty())
+                    cout << "Stack is empty.\n";
+                else
+                    cout << "Stack is not empty.\n";
                 break;
-            }
+
+            case 4:
+                if (s.isEmpty())
+                    cout << "Stack is empty!\n";
+                else
+                    cout << "Top element: " << s.top() << endl;
+                break;
+
+            case 5:
+                cout << "Exiting program...\n";
+                break;
 
             default:
-                cout << "Invalid data type choice!";
+                cout << "Invalid choice! Try again.\n";
         }
 
-        cout << "\n\nDo you want to perform operations again?";
-        cout << "\n1. Yes";
-        cout << "\n2. No";
-        cout << "\nEnter choice: ";
-        cin >> repeat;
-
-    } while(repeat == 1);
-
-    cout << "\nProgram terminated successfully!";
+    } while (choice != 5);
 
     return 0;
 }
