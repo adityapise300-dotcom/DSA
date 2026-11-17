@@ -1,57 +1,86 @@
 #include<iostream>
 using namespace std;
 
-int main(){
+class Calculator {
+
+    float a, b;
+
+public:
+
+    void getNumbers() {
+        cout << "Enter two numbers: ";
+        cin >> a >> b;
+    }
+
+    void addition() {
+        cout << "Addition = " << a+b << endl;
+    }
+
+    void subtraction() {
+        cout << "Subtraction = " << a-b << endl;
+    }
+
+    void multiplication() {
+        cout << "Multiplication = " << a*b << endl;
+    }
+
+    void division() {
+        if(b != 0) {
+            cout << "Division = " << a/b << endl;
+        }
+        else {
+            cout << "Division by zero is not possible!" << endl;
+        }
+    }
+};
+
+int main() {
+
+    Calculator obj;
     int choice;
-    float a,b;
 
-    do{
-        cout<<"\n----- Simple Calculator -----"<<endl;
-        cout<<"1. Addition"<<endl;
-        cout<<"2. Subtraction"<<endl;
-        cout<<"3. Multiplication"<<endl;
-        cout<<"4. Division"<<endl;
-        cout<<"5. Exit"<<endl;
+    do {
+        cout << "\n----- Simple Calculator -----" << endl;
+        cout << "1. Addition" << endl;
+        cout << "2. Subtraction" << endl;
+        cout << "3. Multiplication" << endl;
+        cout << "4. Division" << endl;
+        cout << "5. Exit" << endl;
 
-        cout<<"\nEnter your choice: ";
-        cin>>choice;
+        cout << "\nEnter your choice: ";
+        cin >> choice;
 
-        if(choice>=1 && choice<=4){
-            cout<<"Enter two numbers: ";
-            cin>>a>>b;
+        if(choice >= 1 && choice <= 4) {
+            obj.getNumbers();
         }
 
-        switch(choice){
+        switch(choice) {
+
             case 1:
-                cout<<"Addition = "<<a+b<<endl;
+                obj.addition();
                 break;
 
             case 2:
-                cout<<"Subtraction = "<<a-b<<endl;
+                obj.subtraction();
                 break;
 
             case 3:
-                cout<<"Multiplication = "<<a*b<<endl;
+                obj.multiplication();
                 break;
 
             case 4:
-                if(b!=0){
-                    cout<<"Division = "<<a/b<<endl;
-                }
-                else{
-                    cout<<"Division by zero is not possible!"<<endl;
-                }
+                obj.division();
                 break;
 
             case 5:
-                cout<<"Exiting Calculator..."<<endl;
+                cout << "Exiting Calculator..." << endl;
                 break;
 
             default:
-                cout<<"Invalid Choice!"<<endl;
+                cout << "Invalid Choice!" << endl;
         }
 
-    }while(choice!=5);
+    } while(choice != 5);
 
     return 0;
 }
